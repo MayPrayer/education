@@ -2,6 +2,7 @@ package com.hbnu.edu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * ClassName: EduApplication <br/>
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since JDK 1.8
  */
 @SpringBootApplication   //启动类注解
+@ComponentScan(basePackages = "com.hbnu") //设置扫描所有com.hbnu 包中的注解，不设置的话只能扫描当前包中
 public class EduApplication {
     public static void main(String[] args) {
         SpringApplication.run(EduApplication.class,args);
