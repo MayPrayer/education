@@ -15,10 +15,15 @@ spring:
     username: 'root'
     driver-class-name: 'com.mysql.cj.jdbc.Driver'
   jackson:
-    date-format:  'yyyy-MM-dd HH:mm:ss'   #解决时区问题
+    date-format:  'yyyy-MM-dd HH:mm:ss'   #解决json传输时区问题
     time-zone:  'GMT+8'
 #mybatis 日志
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis-plus:
+#  configuration:
+#    log-impl: 'org.apache.ibatis.logging.stdout.StdOutImpl'
 
+#日志显示设置
+#logging:
+#  level: 'debug'
+
+#开始使用logback代替mybatis+自带的日志 配置logback-spring.xml 拷贝

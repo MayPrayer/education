@@ -4,12 +4,11 @@ package com.hbnu.edu.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hbnu.base.config.exception.MyException;
 import com.hbnu.edu.entity.Teacher;
 import com.hbnu.edu.entity.vo.TeacherQuery;
 import com.hbnu.edu.service.TeacherService;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.collections4.Get;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import com.hbnu.util.Result;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -43,9 +41,14 @@ public class TeacherController {
     /*删除指定id教师记录*/
     @ApiOperation(value = "返回删除信息结果")
     @DeleteMapping("{id}")
-    public String delOneTeacher(@PathVariable("id") long id) {
+    public String delOneTeacher(@PathVariable("id") long id) throws MyException {
         //模拟异常
-        int i =1/0;
+//        try{
+//        int i =1/0;
+//        }catch (Exception e){
+//            throw new MyException("自定义异常",404);
+//        }
+
         Boolean reuslt = teacherService.removeById(id);
         if (reuslt) {
             return "删除成功";

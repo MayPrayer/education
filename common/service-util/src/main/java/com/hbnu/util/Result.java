@@ -18,11 +18,11 @@ import java.util.Map;
 @Data
 public class Result {
     @ApiModelProperty(value = "返回码")
-    private int Code;
+    private Integer code;
     @ApiModelProperty(value = "返回信息")
     private String message;
     @ApiModelProperty(value = "返回数据总条数")
-    private long count;
+    private Long count;
     @ApiModelProperty(value = "返回数据")
     private Object data;
 
@@ -49,13 +49,18 @@ public class Result {
         return this;
     }
 
-    public Result setCount(long count) {
+    public Result setCount(Long count) {
         this.count = count;
         return this;
     }
 
     public Result setMessage(String message) {
         this.message = message;
+        return this;
+    }
+
+    public Result setCode(Integer code) {
+        this.code = code;
         return this;
     }
 }
