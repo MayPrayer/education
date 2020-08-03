@@ -9,7 +9,7 @@ package com.hbnu.util;
  * @since JDK 1.8
  */
 public interface ResultCode {
-    public final static int SUCCESS = 200;
+    public final static int SUCCESS = 20000;
     public final static int FAILED = 300;
 
 }

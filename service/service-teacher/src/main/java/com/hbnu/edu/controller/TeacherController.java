@@ -27,6 +27,7 @@ import java.util.List;
  */
 @RestController //返回json数据
 @RequestMapping("/edu/teacher")
+@CrossOrigin
 public class TeacherController {
     @Autowired
     private TeacherService teacherService;
@@ -75,6 +76,7 @@ public class TeacherController {
     @PostMapping("pageTeacherConditions/{curpage}/{pagesize}")
     /* @RequestBody  用于post提交，且required = false表示不是必传选项 */
     public Result getTeacherPageByCond(@PathVariable("curpage") int curpage, @PathVariable("pagesize") int pagesize, @RequestBody(required = false) TeacherQuery teacherQuery) {
+        System.out.println("执行了！");
         Page<Teacher> page = new Page(curpage, pagesize);
         QueryWrapper<Teacher> queryWrapper = new QueryWrapper();
         //获取条件
@@ -90,7 +92,7 @@ public class TeacherController {
             queryWrapper.ge("gmt_create",GmtCreate);
         }
         if (!StringUtils.isEmpty(GmtModified)){
-            queryWrapper.le("gmt_codified",GmtModified);
+            queryWrapper.le("gmt_modified",GmtModified);
         }
         if (!StringUtils.isEmpty(level)){
             queryWrapper.eq("level",level);
