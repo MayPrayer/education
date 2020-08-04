@@ -97,6 +97,8 @@ public class TeacherController {
         if (!StringUtils.isEmpty(level)){
             queryWrapper.eq("level",level);
         }
+        //按照创建时间降序排列
+        queryWrapper.orderByDesc("gmt_create");
         teacherService.page(page,queryWrapper);
         //返回数据集合
         List<Teacher> datalist = page.getRecords();
