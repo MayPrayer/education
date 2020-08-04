@@ -85,21 +85,21 @@ public class TeacherController {
         Date GmtModified = teacherQuery.getGmtModified();
         Integer level = teacherQuery.getLevel();
         //判断条件不为空,拼装查询条件
-        if (!StringUtils.isEmpty(name)){
-            queryWrapper.like("name",name);
+        if (!StringUtils.isEmpty(name)) {
+            queryWrapper.like("name", name);
         }
-        if (!StringUtils.isEmpty(GmtCreate)){
-            queryWrapper.ge("gmt_create",GmtCreate);
+        if (!StringUtils.isEmpty(GmtCreate)) {
+            queryWrapper.ge("gmt_create", GmtCreate);
         }
-        if (!StringUtils.isEmpty(GmtModified)){
-            queryWrapper.le("gmt_modified",GmtModified);
+        if (!StringUtils.isEmpty(GmtModified)) {
+            queryWrapper.le("gmt_modified", GmtModified);
         }
-        if (!StringUtils.isEmpty(level)){
-            queryWrapper.eq("level",level);
+        if (!StringUtils.isEmpty(level)) {
+            queryWrapper.eq("level", level);
         }
         //按照创建时间降序排列
         queryWrapper.orderByDesc("gmt_create");
-        teacherService.page(page,queryWrapper);
+        teacherService.page(page, queryWrapper);
         //返回数据集合
         List<Teacher> datalist = page.getRecords();
         return Result.sucess().setCount(page.getTotal()).setData(datalist);
@@ -107,12 +107,11 @@ public class TeacherController {
 
     @ApiOperation(value = "教师添加")
     @PostMapping("addTeacher")
-    public Result addTeacher(@RequestBody Teacher teacher){
-           Boolean result =  teacherService.save(teacher);
-           if (result){
-               return Result.sucess();
-           }
-           else{
+    public Result addTeacher(@RequestBody Teacher teacher) {
+        Boolean result = teacherService.save(teacher);
+        if (result) {
+            return Result.sucess();
+        } else {
             return Result.failed();
         }
     }
@@ -120,14 +119,20 @@ public class TeacherController {
 
     @ApiOperation(value = "教师信息修改")
     @PostMapping("modifTeacher")
-    public Result modifTeacher(@RequestBody Teacher teacher){
-        Boolean result =  teacherService.updateById(teacher);
-        if (result){
+    public Result modifTeacher(@RequestBody Teacher teacher) {
+        Boolean result = teacherService.updateById(teacher);
+        if (result) {
             return Result.sucess();
-        }
-        else{
+        } else {
             return Result.failed();
         }
+    }
+
+    @ApiOperation(value = "根据id查询单个教师信息")
+    @GetMapping("{id}")
+    public Result getTeacherInfoById(@PathVariable String id ) {
+        Teacher teacher = teacherService.getById(id);
+        return Result.sucess().setData(teacher);
     }
 
 
