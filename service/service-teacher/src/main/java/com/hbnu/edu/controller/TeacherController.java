@@ -42,7 +42,7 @@ public class TeacherController {
     /*删除指定id教师记录*/
     @ApiOperation(value = "返回删除信息结果")
     @DeleteMapping("{id}")
-    public String delOneTeacher(@PathVariable("id") long id) throws MyException {
+    public Result delOneTeacher(@PathVariable("id") long id) throws MyException {
         //模拟异常
 //        try{
 //        int i =1/0;
@@ -52,9 +52,9 @@ public class TeacherController {
 
         Boolean reuslt = teacherService.removeById(id);
         if (reuslt) {
-            return "删除成功";
+            return Result.sucess();
         } else {
-            return "已经删除，无法再次删除";
+            return Result.failed();
         }
     }
 
