@@ -14,7 +14,7 @@ import java.util.HashMap;
  * @since JDK 1.8
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/edu/user")
 @CrossOrigin  //解决跨域问题
 public class LoginController {
 

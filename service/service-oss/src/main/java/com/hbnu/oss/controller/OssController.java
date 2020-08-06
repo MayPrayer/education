@@ -5,10 +5,7 @@ import com.hbnu.util.Result;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -23,7 +20,8 @@ import java.util.Map;
  * @since JDK 1.8
  */
 @RestController
-@RequestMapping("edu/oss")
+@RequestMapping("edo/oss")
+@CrossOrigin
 @Slf4j
 public class OssController {
     @Autowired
@@ -32,6 +30,7 @@ public class OssController {
     @ApiOperation(value = "文件上传，返回文件路径")
     @PostMapping("fileUpload")
     public Result fileUpload(@RequestParam("file") MultipartFile multipartFile) {
+        log.info("上传了一个文件");
         String filepath = ossService.imageUpload(multipartFile);
         log.info("返回路径为" + filepath);
         Map map = new HashMap();

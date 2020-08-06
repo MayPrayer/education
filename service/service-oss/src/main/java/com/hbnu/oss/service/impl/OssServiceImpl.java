@@ -2,6 +2,7 @@ package com.hbnu.oss.service.impl;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectRequest;
 import com.hbnu.oss.service.OssService;
 import com.hbnu.oss.util.ReadPropertiesConfig;
@@ -50,9 +51,11 @@ public class OssServiceImpl implements OssService {
         //拼接上传文件名称
         String filename=uuid+"."+suffix;
         //外网访问路径
-        String filepath = "https://"+bucketName+"."+endpoint+"/"+filename;
+        String filepath = "http://"+bucketName+"."+endpoint+"/"+curdate+"/"+filename;
         //获取问价输入流
         InputStream inputStream =null;
+        ObjectMetadata objectMetadata =new ObjectMetadata();
+      objectMetadata.setContentType(ReadPropertiesConfig.getcontentType(fileOriName.substring(fileOriName.lastIndexOf("."))));
         try {
             inputStream = multipartFile.getInputStream();
         } catch (IOException e) {
@@ -60,7 +63,7 @@ public class OssServiceImpl implements OssService {
         }
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-        ossClient.putObject(bucketName, curdate+"/"+filename, inputStream);
+        ossClient.putObject(bucketName, curdate+"/"+filename, inputStream,objectMetadata);
         // 关闭OSSClient。
         ossClient.shutdown();
 
