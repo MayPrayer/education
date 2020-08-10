@@ -35,8 +35,9 @@ public class TeacherController {
     /*查询所有教师*/
     @ApiOperation(value = "返回所有教师信息集合，不包括已经删除的教师信息")
     @GetMapping("/findAll")
-    public List<Teacher> getAllTeacher() {
-        return teacherService.list();
+    public Result getAllTeacher() {
+       List<Teacher> teachers =  teacherService.list();
+        return Result.sucess().setData(teachers);
     }
 
     /*删除指定id教师记录*/
@@ -130,7 +131,7 @@ public class TeacherController {
 
     @ApiOperation(value = "根据id查询单个教师信息")
     @GetMapping("{id}")
-    public Result getTeacherInfoById(@PathVariable String id ) {
+    public Result getTeacherInfoById(@PathVariable String id) {
         Teacher teacher = teacherService.getById(id);
         return Result.sucess().setData(teacher);
     }
