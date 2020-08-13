@@ -27,3 +27,7 @@ spring:
 #  level: 'debug'
 
 #开始使用logback代替mybatis+自带的日志 配置logback-spring.xml 拷贝
+
+#配置mybatis xml文件配置
+mybatis-plus:
+  mapper-locations: 'classpath:com/hbnu/edu/mapper/xml/*.xml'

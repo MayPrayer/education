@@ -1,0 +1,21 @@
+server:
+  port: 8003
+spring:
+  application:
+    name: 'service-vod'
+  profiles:
+    active:  'dev'
+  servlet:
+    multipart:
+      max-file-size: '1024MB'
+      max-request-size:  '1024MB'
+#阿里云云点播配置,密钥
+aliyun:
+  vod:
+    file:
+      keyid: 'LTAI4GAMY45Y4BVur2shCh1g'
+      keysecret: 'dtvJAFr2RLTtiHMC7HNdQJHTsxhEQ7'
+
+
+
+

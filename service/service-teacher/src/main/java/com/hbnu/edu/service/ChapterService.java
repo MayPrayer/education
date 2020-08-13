@@ -1,5 +1,6 @@
 package com.hbnu.edu.service;
 
+import com.hbnu.base.config.exception.MyException;
 import com.hbnu.edu.entity.Chapter;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hbnu.edu.entity.vo.ChapterInfo;
@@ -16,5 +17,8 @@ import java.util.List;
  */
 public interface ChapterService extends IService<Chapter> {
 
-     List<ChapterInfo> getChapter(String courseid);
+    Boolean deleteChapter(String chapterid) throws MyException;
+
+    List<ChapterInfo> getChapter(String courseid);
+     void removeChapterByCourseId(String courseId);
 }

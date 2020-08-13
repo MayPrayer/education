@@ -16,4 +16,5 @@ import java.util.List;
 public interface VideoService extends IService<Video> {
 
     List<Video> getVideo(String courseid);
+    // void removeVideoByCourseId(String courseId);
 }

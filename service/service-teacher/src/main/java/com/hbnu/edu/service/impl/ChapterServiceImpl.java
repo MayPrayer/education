@@ -1,6 +1,7 @@
 package com.hbnu.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.hbnu.base.config.exception.MyException;
 import com.hbnu.edu.entity.Chapter;
 import com.hbnu.edu.entity.Video;
 import com.hbnu.edu.entity.vo.ChapterInfo;
@@ -28,6 +29,21 @@ import java.util.List;
 public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> implements ChapterService {
     @Autowired
     private VideoService videoService;
+
+    @Override
+    public Boolean deleteChapter(String chapterid)throws MyException {
+        //查询 小结中是否还有
+        QueryWrapper<Video> queryWrapper = new QueryWrapper();
+        queryWrapper.eq("chapter_id", chapterid);
+        //查询章节中小结数量
+        int count = videoService.count(queryWrapper);
+        if (0==count ){
+           this.removeById(chapterid);
+           return true;
+        }else{
+          throw new MyException("章节下方还有小结无法删除！",30000);
+        }
+    }
 
     @Override
     public List<ChapterInfo> getChapter(String courseid) {
@@ -63,4 +79,13 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
         }
         return finalChapterInfo;
     }
+
+    //根据课程id删除章节
+    @Override
+    public void removeChapterByCourseId(String courseId) {
+        QueryWrapper<Chapter> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id",courseId);
+        baseMapper.delete(wrapper);
+    }
+
 }
