@@ -6,6 +6,11 @@ spring:
     name: 'service-oss'
   profiles:
     active: dev
+  cloud:
+    #nacos配置注册地址
+    nacos:
+      discovery:
+        server-addr: '127.0.0.1:8848'
 #阿里云云存储配置,地域节点，id ，密钥，库名
 aliyun:
   oss:

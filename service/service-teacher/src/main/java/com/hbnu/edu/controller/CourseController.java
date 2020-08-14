@@ -3,6 +3,7 @@ package com.hbnu.edu.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hbnu.edu.client.VodClient;
 import com.hbnu.edu.entity.Course;
 import com.hbnu.edu.entity.vo.CourseInfo;
 import com.hbnu.edu.entity.vo.CourseQuery;
@@ -32,6 +33,8 @@ import java.util.List;
 @CrossOrigin
 @Slf4j
 public class CourseController {
+    @Autowired
+    private VodClient vodClient;
     @Autowired
     private CourseService courseService;
 
@@ -127,6 +130,13 @@ public class CourseController {
             @ApiParam(value = "课程id", required = true)
             @PathVariable String id) {
         courseService.updateBuyCountById(id);
+        return Result.sucess();
+    }
+
+    @ApiOperation("测试远程调用方法")
+    @GetMapping("test")
+    public Result testRemote() {
+        vodClient.test();
         return Result.sucess();
     }
 
