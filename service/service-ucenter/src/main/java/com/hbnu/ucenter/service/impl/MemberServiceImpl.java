@@ -58,7 +58,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         if (!MD5.encrypt(inputPassword).equals(memberquey.getPassword())) {
             return "";
         } else {
-            return JwtUtil.getJwtToken(inputMobile, inputPassword);
+            return JwtUtil.getJwtToken(memberquey.getId(), memberquey.getNickname());
         }
     }
 
@@ -98,10 +98,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     }
 
     @Override
-    public Member parseToken(String mobile) {
+    public Member parseToken(String id) {
         //根据手机号查询用户信息
         QueryWrapper<Member> memberQueryWrapper = new QueryWrapper();
-        memberQueryWrapper.eq("mobile", mobile);
+        memberQueryWrapper.eq("id", id);
         return baseMapper.selectOne(memberQueryWrapper);
     }
 }

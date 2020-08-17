@@ -18,5 +18,5 @@ public interface MemberService extends IService<Member> {
 
     Boolean register(RegisterVo register);
 
-    Member parseToken(String mobile);
+    Member parseToken(String id);
 }

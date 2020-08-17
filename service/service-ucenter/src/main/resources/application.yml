@@ -1,5 +1,5 @@
 server:
-  port: 8002
+  port: 8150
 spring:
   profiles:
     active: 'dev'
@@ -29,4 +29,13 @@ spring:
 
 mybatis-plus:
   mapper-locations: 'com/hbnu/edu/mapper/xml/*.xml'
+
+
+#微信配置
+wx:
+  open:
+    app_id: 'wxed9954c01bb89b47'
+    app_secret: 'a7482517235173ddb4083788de60b90e'
+    redirect_url: 'http://guli.shop/api/ucenter/wx/callback'
+
 

@@ -54,9 +54,9 @@ public class MemberController {
     @ApiOperation("解析token数据")
     @GetMapping("parsetoken")
     public Result parseToken(HttpServletRequest request) {
-        String mobile = JwtUtil.getMemberMobileByJwtToken(request);
+        String id = JwtUtil.getMemberMobileByJwtToken(request);
 
-        Member userinfo = memberService.parseToken(mobile);
+        Member userinfo = memberService.parseToken(id);
         if (userinfo!=null){
             return Result.sucess().setData(userinfo);
         }else{

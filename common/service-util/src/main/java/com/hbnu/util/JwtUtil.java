@@ -24,7 +24,7 @@ public class JwtUtil {
     public static final String APP_SECRET = "ukc8BDbRigUDaY6pZFfWus2jZWLPHO"; //秘钥加密操作
 
     //生成token字符串的方法
-    public static String getJwtToken(String mobile, String password) {
+    public static String getJwtToken(String id, String nickname) {
 
         String JwtToken = Jwts.builder()
                 /*jwt头信息*/
@@ -37,8 +37,8 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
 
                 //设置token主体部分 ，存储用户信息
-                .claim("mobile", mobile)
-                .claim("password", password)
+                .claim("id", id)
+                .claim("nickname", nickname)
 
                 /*签名哈希*/
                 .signWith(SignatureAlgorithm.HS256, APP_SECRET)
@@ -99,7 +99,7 @@ public class JwtUtil {
         }
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET).parseClaimsJws(jwtToken);
         Claims claims = claimsJws.getBody();
-        return (String) claims.get("mobile");
+        return (String) claims.get("id");
     }
 }
 
