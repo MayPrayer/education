@@ -92,7 +92,7 @@ public class JwtUtil {
      * @param request
      * @return
      */
-    public static String getMemberMobileByJwtToken(HttpServletRequest request) {
+    public static String getMemberIdByJwtToken(HttpServletRequest request) {
         String jwtToken = request.getHeader("token");
         if (StringUtils.isEmpty(jwtToken)) {
             return "";

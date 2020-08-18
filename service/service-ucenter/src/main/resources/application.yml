@@ -1,5 +1,6 @@
 server:
   port: 8150
+
 spring:
   profiles:
     active: 'dev'
@@ -26,6 +27,8 @@ spring:
         max-idle: 5
         min-idle: 0
     host: '192.168.174.88'
+  application:
+    name: 'service-ucenter'
 
 mybatis-plus:
   mapper-locations: 'com/hbnu/edu/mapper/xml/*.xml'

@@ -1,8 +1,13 @@
 package com.hbnu.vod.controller;
 
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.hbnu.base.config.exception.MyException;
 import com.hbnu.util.Result;
 import com.hbnu.vod.service.VodService;
+import com.hbnu.vod.util.InitVodClient;
+import com.hbnu.vod.util.ReadPropertiesConfig;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,4 +70,28 @@ public class VodController {
         log.error("我被远程调用了");
         return Result.sucess();
     }
+
+    @ApiOperation(value = "根据id获取凭证")
+    //根据视频id获取视频凭证
+    @GetMapping("getPlayAuth/{id}")
+    public Result getPlayAuth(@PathVariable String id) {
+        try {
+            //创建初始化对象
+            DefaultAcsClient client =
+                    InitVodClient.initVodClient(ReadPropertiesConfig.KEY_ID, ReadPropertiesConfig.KEY_SECRET);
+            //创建获取凭证request和response对象
+            GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+            //向request设置视频id
+            request.setVideoId(id);
+            //调用方法得到凭证
+            GetVideoPlayAuthResponse response = client.getAcsResponse(request);
+            String playAuth = response.getPlayAuth();
+         return   Result.sucess().setData(playAuth);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return Result.failed();
+    }
+
+
 }

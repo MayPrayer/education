@@ -1,10 +1,15 @@
 package com.hbnu.edu.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hbnu.base.config.exception.MyException;
 import com.hbnu.edu.entity.Course;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hbnu.edu.entity.fontvo.CourseFrontVo;
+import com.hbnu.edu.entity.fontvo.CourseWebVo;
 import com.hbnu.edu.entity.vo.CourseInfo;
 import com.hbnu.edu.entity.vo.FinalCourseInfo;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -28,4 +33,7 @@ public interface CourseService extends IService<Course> {
 
     void updateBuyCountById(String id);
 
+    Map<String, Object> getCourseFrontList(Page<Course> pageCourse, CourseFrontVo courseFrontVo);
+
+    CourseWebVo getBaseCourseInfo(String courseId);
 }

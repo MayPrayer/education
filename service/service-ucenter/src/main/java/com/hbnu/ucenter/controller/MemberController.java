@@ -6,8 +6,10 @@ import com.hbnu.ucenter.entity.vo.RegisterVo;
 import com.hbnu.ucenter.service.MemberService;
 import com.hbnu.util.JwtUtil;
 import com.hbnu.util.Result;
+import com.hbnu.util.ordervo.UcenterMemberOrder;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.util.StringUtils;
@@ -54,15 +56,27 @@ public class MemberController {
     @ApiOperation("解析token数据")
     @GetMapping("parsetoken")
     public Result parseToken(HttpServletRequest request) {
-        String id = JwtUtil.getMemberMobileByJwtToken(request);
+        String id = JwtUtil.getMemberIdByJwtToken(request);
 
         Member userinfo = memberService.parseToken(id);
-        if (userinfo!=null){
+        if (userinfo != null) {
             return Result.sucess().setData(userinfo);
-        }else{
+        } else {
             return Result.failed();
         }
     }
+
+
+    //会被远程调用
+    @ApiOperation("根据用户id获取用户信息")
+    @GetMapping("getMemInfo/{memid}")
+    public UcenterMemberOrder getMemInfo(@PathVariable String memid) {
+        UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
+        Member member = memberService.getById(memid);
+        BeanUtils.copyProperties(member,ucenterMemberOrder);
+        return ucenterMemberOrder;
+    }
+
 
 }
 

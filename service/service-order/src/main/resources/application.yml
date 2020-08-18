@@ -1,0 +1,38 @@
+server:
+  port: 8007
+
+spring:
+  application:
+    name: 'service-order'
+  profiles:
+    active: 'dev'
+  datasource:
+    url: 'jdbc:mysql://localhost:3306/education?serverTimezone=GMT%2B8'
+    password: '123456'
+    username: 'root'
+    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+    jackson:
+      date-format:  'yyyy-MM-dd HH:mm:ss'   #解决json传输时区问题
+      time-zone:  'GMT+8'
+  cloud:
+    nacos:
+      discovery:
+        server-addr: '127.0.0.1:8848'
+
+mybatis-plus:
+  mapper-locations: 'com/hbnu/order/mapper/xml/*.xml'
+  configuration:
+    log-impl: 'org.apache.ibatis.logging.stdout.StdOutImpl'
+
+wx:
+  pay:
+    appid: 'wx74862e0dfcf69954'
+    partner: '1558950191'
+    partnerkey: 'T6m9iK73b0kn9g5v426MKfHQH7X8rKwb'
+    notifyurl: 'http://guli.shop/api/order/weixinPay/weixinNotify'
+
+
+##\u5F00\u542F\u7194\u65AD\u673A\u5236
+##feign.hystrix.enabled=true
+## \u8BBE\u7F6Ehystrix\u8D85\u65F6\u65F6\u95F4\uFF0C\u9ED8\u8BA41000ms
+##hystrix.command.default.execution.isolation.thr

@@ -2,6 +2,7 @@ package com.hbnu.edu.mapper;
 
 import com.hbnu.edu.entity.Course;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hbnu.edu.entity.fontvo.CourseWebVo;
 import com.hbnu.edu.entity.vo.FinalCourseInfo;
 
 /**
@@ -14,6 +15,8 @@ import com.hbnu.edu.entity.vo.FinalCourseInfo;
  */
 public interface CourseMapper extends BaseMapper<Course> {
 
-    public FinalCourseInfo getFinalCousrseInfo(String courseid);
+    FinalCourseInfo getFinalCousrseInfo(String courseid);
+
+    CourseWebVo getBaseCourseInfo(String courseid);
 
 }
