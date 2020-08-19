@@ -15,4 +15,6 @@ import com.hbnu.util.ordervo.UcenterMemberOrder;
 public interface OrderService extends IService<Order> {
 
     String makeorder(String courseid, String memid);
+
+    Boolean isBoughtByCourseId(String courseId, String id);
 }

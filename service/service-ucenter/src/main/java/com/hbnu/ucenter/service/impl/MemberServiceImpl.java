@@ -104,4 +104,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         memberQueryWrapper.eq("id", id);
         return baseMapper.selectOne(memberQueryWrapper);
     }
+
+    @Override
+    public Integer countRegisterDay(String day) {
+        return baseMapper.countRegisterDay(day);
+    }
+
 }

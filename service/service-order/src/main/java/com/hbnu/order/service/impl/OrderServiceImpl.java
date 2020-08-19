@@ -1,5 +1,6 @@
 package com.hbnu.order.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.hbnu.order.client.EduClient;
 import com.hbnu.order.client.UcentClient;
 import com.hbnu.order.entity.Order;
@@ -52,5 +53,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         baseMapper.insert(order);
 
         return order.getOrderNo();
+    }
+
+    //判断课程是否已经购买
+    @Override
+    public Boolean isBoughtByCourseId(String courseId, String memberId) {
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper
+                .eq("member_id", memberId)
+                .eq("course_id", courseId)
+                .eq("status", 1);
+        Integer count = baseMapper.selectCount(queryWrapper);
+        return count.intValue() > 0;
     }
 }

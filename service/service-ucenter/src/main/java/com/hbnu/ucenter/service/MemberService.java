@@ -19,4 +19,6 @@ public interface MemberService extends IService<Member> {
     Boolean register(RegisterVo register);
 
     Member parseToken(String id);
+
+    Integer countRegisterDay(String day);
 }

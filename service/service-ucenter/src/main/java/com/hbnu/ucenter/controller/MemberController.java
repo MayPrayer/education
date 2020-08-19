@@ -78,5 +78,13 @@ public class MemberController {
     }
 
 
+    //查询某一天的注册人数
+    @ApiOperation("查询某一天的注册人数")
+    @GetMapping("countRegister/{day}")
+    public Result countRegister(@PathVariable String day){
+        Integer count = memberService.countRegisterDay(day);
+        return  Result.sucess().setData(count);
+    }
+
 }
 

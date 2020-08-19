@@ -48,6 +48,16 @@ public class OrderController {
     }
 
 
+    //查询订单表中订单的状态 判断课程是否购买
+    @ApiOperation( "判断课程是否购买")
+    @GetMapping("isBought/{courseId}")
+    public Result isBuyByCourseId(@PathVariable String courseId, HttpServletRequest request) {
+       String id =  JwtUtil.getMemberIdByJwtToken(request);
+        Boolean isBought = orderService.isBoughtByCourseId(courseId, id);
+        return Result.sucess().setData(isBought);
+    }
+
+
 
 }
 
